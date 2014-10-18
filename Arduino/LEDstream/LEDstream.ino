@@ -82,7 +82,7 @@ static const uint8_t magic[] = {'A','d','a'};
 // If no serial data is received for a while, the LEDs are shut off
 // automatically.  This avoids the annoying "stuck pixel" look when
 // quitting LED display programs on the host computer.
-static const unsigned long serialTimeout = 15000; // 15 seconds
+static const unsigned long serialTimeout = 500;
 
 void setup()
 {
@@ -135,7 +135,9 @@ void setup()
     }
     delay(1); // One millisecond pause = latch
   }
-
+  
+  setStandardColor();
+  
   Serial.print("Ada\n"); // Send ACK string to host
 
   startTime    = micros();
@@ -162,10 +164,7 @@ void setup()
       }
       // If no data received for an extended time, turn off all LEDs.
       if((t - lastByteTime) > serialTimeout) {
-        for(c=0; c<32767; c++) {
-          for(SPDR=0; !(SPSR & _BV(SPIF)); );
-        }
-        delay(1); // One millisecond pause = latch
+        setStandardColor();
         lastByteTime = t; // Reset counter
       }
     }
@@ -238,6 +237,13 @@ void setup()
       }
     } // end switch
   } // end for(;;)
+}
+
+void setStandardColor(){
+  for(int c=0; c<32767; c++) {
+    for(SPDR=128; !(SPSR & _BV(SPIF)); );
+  }
+  delay(1); // One millisecond pause = latch
 }
 
 void loop()
