@@ -39,7 +39,7 @@ the serial port device name, e.g.:
 #include <time.h>
 #include <math.h>
 
-#define N_LEDS 25 // Max of 65536
+#define N_LEDS 98 // Max of 65536
 
 int main(int argc,char *argv[])
 {
