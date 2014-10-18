@@ -1,3 +1,7 @@
+Main difference to the original is the default lighting if no connection is made to the arduino.
+
+-ORIGINAL README-
+
 Adalight is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as
 published by the Free Software Foundation, either version 3 of
